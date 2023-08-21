@@ -1,0 +1,41 @@
+name: Terraform Plan and Apply
+
+on:
+  pull_request:
+    branches-ignore:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Install GitHub CLI
+      run: |
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+        sudo apt-add-repository https://cli.github.com/packages
+        sudo apt update
+        sudo apt install gh
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Plan
+      if: github.event_name == 'pull_request'
+      run: |
+        PLAN=$(terraform plan)
+        echo "$PLAN" > plan.txt
+
+    - name: Add Plan as PR Comment
+      if: github.event_name == 'pull_request'
+      run: |
+        PR_ID=$(gh pr view https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }} --json number -q ".number")
+        gh pr comment $PR_ID --body "Terraform Plan Output:\n\`\`\`\n$(cat plan.txt)\n\`\`\`"
