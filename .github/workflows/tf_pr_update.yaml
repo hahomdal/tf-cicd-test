@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+ GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
+
 jobs:
   terraform-update-pr:
     runs-on: ubuntu-latest

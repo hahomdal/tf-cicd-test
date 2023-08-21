@@ -1,5 +1,4 @@
 terraform {
- required_providers {
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -7,10 +6,8 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket                      = "test-shared-terra"
+    bucket                      = "tf-cicd-test-stb"
     prefix                      = "test-tf-cicd-demo"
-    impersonate_service_account = "terraform-projcreator@test-shared-terra-000
-1.iam.gserviceaccount.com"
   }
 
 }
