@@ -108,7 +108,7 @@ jobs:
     - name: diff
       if: github.event_name == 'pull_request'
       run: |
-        echo ${{steps.plan.outputs.stdout}} > plan.txt
+        echo ${{steps.plan.outputs.stdout}} | tee plan.txt
         pwd
         docker run --rm -it  -v "$(pwd):/src" im2nguyen/rover -genImage true -planPath plan.txt
         ls -la
