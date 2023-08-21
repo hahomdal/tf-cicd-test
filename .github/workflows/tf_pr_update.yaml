@@ -5,11 +5,8 @@ on:
     branches-ignore:
       - main
   push:
-    branches:
+    branches-ignore:
       - main
-
-env:
- GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
 jobs:
   terraform-update-pr:
@@ -36,15 +33,21 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
     - name: Terraform Plan
       if: github.event_name == 'pull_request'
       run: terraform plan -no-color
       continue-on-error: true
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
@@ -102,6 +105,21 @@ jobs:
               body: output
             })
           }
+    - name: diff
+      if: github.event_name == 'pull_request'
+      run: |
+        echo ${{steps.plan.outputs.stdout}} > plan.txt
+        pwd
+        docker run --rm -it  -v "$(pwd):/src" im2nguyen/rover -genImage true -planPath plan.txt
+        ls -la
+    - name: Upload failed tests
+      if: github.event_name == 'pull_request'
+      uses: edunad/actions-image@v2.0.0
+      with:
+        path: './*.svg'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        title: 'Failed E2E tests 🙀'
+        # annotationLevel: 'failure'
       #      run: |
       #  PLAN=$(terraform plan)
       #  echo "$PLAN" > plan.txt
