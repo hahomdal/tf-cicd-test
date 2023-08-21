@@ -1,4 +1,4 @@
-name: Terraform Plan and Apply
+name: Terraform Plan and Comment
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  terraform:
+  terraform-update-pr:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the repository
@@ -20,6 +20,7 @@ jobs:
 
     - name: Install GitHub CLI
       run: |
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg 
         sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
         sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list
         sudo apt update
