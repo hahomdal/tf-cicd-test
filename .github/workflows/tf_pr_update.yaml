@@ -9,7 +9,7 @@ on:
       - main
 
 env:
- GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
+ GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
 jobs:
   terraform-update-pr:
