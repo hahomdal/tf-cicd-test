@@ -106,13 +106,14 @@ jobs:
             })
           }
     - name: diff
+      if: github.event_name == 'pull_request'
       run: |
         echo ${{steps.plan.outputs.stdout}} > plan.txt
         pwd
         docker run --rm -it  -v "$(pwd):/src" im2nguyen/rover -genImage true -planPath plan.txt
         ls -la
     - name: Upload failed tests
-      if: ${{ failure() }}
+      if: github.event_name == 'pull_request'
       uses: edunad/actions-image@v2.0.0
       with:
         path: './*.svg'
