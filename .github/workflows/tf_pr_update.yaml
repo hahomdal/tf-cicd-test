@@ -9,6 +9,8 @@ on:
 jobs:
   terraform-update-pr:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v3
@@ -48,8 +50,6 @@ jobs:
         GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
     - uses: actions/github-script@v6
-      permissions:
-        pull-requests: write
       if: github.event_name == 'pull_request'
       env:
         PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
