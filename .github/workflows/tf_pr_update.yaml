@@ -38,7 +38,9 @@ jobs:
     - name: Terraform Plan
       id: plan
       if: github.event_name == 'pull_request'
-      run: terraform plan -no-color
+      run: |
+        terraform plan -out=plan.out
+        cat plan.out
       continue-on-error: true
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
