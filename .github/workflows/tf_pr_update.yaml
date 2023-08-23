@@ -52,7 +52,7 @@ jobs:
         /bin/echo ${{ steps.plan.outputs.stdout }}
         pwd
         ls -la
-        docker run --rm -it  -v "$(pwd):/src" im2nguyen/rover -genImage=true -planJSONPath=plan.json
+        docker run --rm -v "$(pwd):/src" im2nguyen/rover -genImage=true -planJSONPath=plan.json
         
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
