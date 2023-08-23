@@ -46,6 +46,10 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
+    - name: list files
+      if: github.event_name == 'pull_request'
+      run: ls -la
+
     - name: diff
       if: github.event_name == 'pull_request'
       run: docker run --rm -v "$(pwd):/src" hahomdal/rover -genImage=true -planJSONPath=plan.json
