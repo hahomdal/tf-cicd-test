@@ -78,8 +78,8 @@ jobs:
               myError += data.toString();
             }
           };
-          options.cwd = './lib';
-          await exec.exec('/bin/base64 -i rover.svg');
+          options.cwd = './src';
+          await exec.exec('/bin/base64', ['-i', 'rover.svg'], options);
           core.warning('TESTINGTESTINGTESTING');
           // 1. Retrieve existing bot comments for the PR
           const { data: comments } = await github.rest.issues.listComments({
