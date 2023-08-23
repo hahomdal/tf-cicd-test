@@ -63,6 +63,24 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
+          const exec = require('@actions/exec');
+          const core = require('@actions/core');
+
+          let myOutput = '';
+          let myError = '';
+
+          const options = {};
+          options.listeners = {
+            stdout: (data: Buffer) => {
+              myOutput += data.toString();
+            },
+            stderr: (data: Buffer) => {
+              myError += data.toString();
+            }
+          };
+          options.cwd = './lib';
+          await exec.exec('/bin/base64 -i rover.svg');
+          core.warning('TESTINGTESTINGTESTING');
           // 1. Retrieve existing bot comments for the PR
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner,
@@ -113,13 +131,13 @@ jobs:
             })
           }
 
-    - name: Upload failed tests
-      if: github.event_name == 'pull_request'
-      uses: edunad/actions-image@v2.0.0
-      with:
-        path: './*.svg'
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        title: 'Failed E2E tests 🙀'
+    #- name: Upload failed tests
+    #  if: github.event_name == 'pull_request'
+    #  uses: edunad/actions-image@v2.0.0
+    #  with:
+    #    path: './*.svg'
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    title: 'Failed E2E tests 🙀'
         # annotationLevel: 'failure'
       #      run: |
       #  PLAN=$(terraform plan)
