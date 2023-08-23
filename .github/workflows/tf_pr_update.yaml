@@ -64,7 +64,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           //const exec = require('@actions/exec');
-          const core = require('@actions/core');
+          //const core = require('@actions/core');
 
           let myOutput = '';
           let myError = '';
