@@ -48,11 +48,7 @@ jobs:
 
     - name: diff
       if: github.event_name == 'pull_request'
-      run: |
-        /bin/echo ${{ steps.plan.outputs.stdout }}
-        pwd
-        ls -la
-        docker run --rm -v "$(pwd):/src" hahomdal/rover -genImage=true -planJSONPath=plan.json
+      run: docker run --rm -v "$(pwd):/src" hahomdal/rover -genImage=true -planJSONPath=plan.json
         
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
