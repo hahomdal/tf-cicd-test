@@ -130,6 +130,10 @@ jobs:
               body: output
             })
           }
+    - uses: actions/upload-artifact@v3
+      with:
+        name: visual-diff
+        path: rover.svg
 
     #- name: Upload failed tests
     #  if: github.event_name == 'pull_request'
