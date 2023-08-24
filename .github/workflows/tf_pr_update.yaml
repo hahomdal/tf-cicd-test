@@ -77,7 +77,7 @@ jobs:
               myError += data.toString();
             }
           };
-          options.cwd = './src';
+          options.cwd = '/src';
           await exec.exec('/bin/base64', ['-i', 'rover.svg'], options);
 
           core.warning('TESTINGTESTINGTESTING');
