@@ -70,14 +70,15 @@ jobs:
           let myError = '';
           const options = {};
           options.listeners = {
-            stdout: (data: Buffer) => {
+            stdout: (data) => {
               myOutput += data.toString();
             },
-            stderr: (data: Buffer) => {
+            stderr: (data) => {
               myError += data.toString();
             }
           };
-
+          options.cwd = './src';
+          await exec.exec('/bin/base64', ['-i', 'rover.svg'], options);
 
           core.warning('TESTINGTESTINGTESTING');
           // 1. Retrieve existing bot comments for the PR
