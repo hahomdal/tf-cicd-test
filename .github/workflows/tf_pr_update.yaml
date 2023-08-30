@@ -62,6 +62,14 @@ jobs:
     - name: unzip rover generated file
       if: github.event_name == 'pull_request'
       run: unzip rover.zip -d ${{ github.run_id }}
+
+    - name: Generate diff svg
+      if: github.event_name == 'pull_request'
+      run: docker run --rm -v "$(pwd):/src" hahomdal/rover  -genImage=true -planJSONPath=plan.json
+      
+    - name: convert svg to png
+      if: github.event_name == 'pull_request'
+      run: convert -background none -density 1000 -resize 1000x rover.svg ${{ github.run_id }}/rover.png
         
     - id: 'google-auth'
       uses: 'google-github-actions/auth@v1'
@@ -114,7 +122,7 @@ jobs:
           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
           <details><summary>Validation Output</summary>
-          ![Visual Diff](https://storage.cloud.google.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html)
+          ![Visual Diff](https://storage.cloud.google.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/rover.png)] (https://storage.cloud.google.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html)
           ![a red dot](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg== "The Image")
           \`\`\`\n
           ${{ steps.validate.outputs.stdout }}
