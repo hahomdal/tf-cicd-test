@@ -96,7 +96,7 @@ jobs:
             }
           };
           //options.cwd = '/src';
-          await exec.exec('/bin/base64', ['-i', 'rover.svg'], options);
+          //await exec.exec('/bin/base64', ['-i', 'rover.svg'], options);
 
           core.warning('TESTINGTESTINGTESTING');
           // 1. Retrieve existing bot comments for the PR
@@ -114,7 +114,7 @@ jobs:
           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
           <details><summary>Validation Output</summary>
-          ![Visual Diff](https://storage.cloud.google.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}.svg/rover.svg)
+          ![Visual Diff](https://storage.cloud.google.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html)
           ![a red dot](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg== "The Image")
           \`\`\`\n
           ${{ steps.validate.outputs.stdout }}
