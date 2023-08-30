@@ -57,7 +57,22 @@ jobs:
 
     - name: diff
       if: github.event_name == 'pull_request'
-      run: docker run --rm -v "$(pwd):/src" hahomdal/rover -genImage=true -planJSONPath=plan.json
+      run: docker run --rm -v "$(pwd):/src" hahomdal/rover -standalone -planJSONPath=plan.json
+
+    - name: unzip rover generated file
+      if: github.event_name == 'pull_request'
+      run: unzip rover.zip -d ${{ github.run_id }}
+        
+    - id: 'google-auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.TERRAFORM_SA }}'
+    
+    - id: 'google-upload-file'
+      uses: 'google-github-actions/upload-cloud-storage@v1'
+      with:
+        path: '${{ github.run_id }}'
+        destination: 'f29baf0e-81df-4090-a5a5-f33cb9566b0d'
         
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
@@ -139,16 +154,6 @@ jobs:
         name: visual-diff
         path: rover.svg
         
-    - id: 'google-auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.TERRAFORM_SA }}'
-    
-    - id: 'google-upload-file'
-      uses: 'google-github-actions/upload-cloud-storage@v1'
-      with:
-        path: 'rover.svg'
-        destination: 'f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}.svg'
 
     #- name: Upload failed tests
     #  if: github.event_name == 'pull_request'
