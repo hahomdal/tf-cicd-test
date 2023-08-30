@@ -81,7 +81,7 @@ jobs:
     - id: 'google-upload-file'
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
-        path: '${{ github.run_id }}'
+        path: ${{ github.run_id }}
         destination: 'f29baf0e-81df-4090-a5a5-f33cb9566b0d'
         
     - uses: actions/github-script@v6
