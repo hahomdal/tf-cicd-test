@@ -69,7 +69,9 @@ jobs:
       
     - name: convert svg to png
       if: github.event_name == 'pull_request'
-      run: convert -background none -density 1000 -resize 1000x rover.svg ${{ github.run_id }}/rover.png
+      run: |
+        sudo apt-get install gsfonts
+        convert -background none -density 1000 -resize 1000x rover.svg ${{ github.run_id }}/rover.png
         
     - id: 'google-auth'
       uses: 'google-github-actions/auth@v1'
