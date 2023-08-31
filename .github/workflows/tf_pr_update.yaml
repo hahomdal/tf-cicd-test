@@ -37,7 +37,8 @@ jobs:
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate -no-color
+      run: | 
+        echo stdout=$(terraform validate -no-color)| tee -a "$GITHUB_OUTPUT"
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
 
@@ -47,7 +48,7 @@ jobs:
       run: |
         terraform plan -out=plan.out
         terraform show -json plan.out > plan.json
-        echo stdout=$(terraform show plan.out ) >> "$GITHUB_OUTPUT"
+        echo stdout=$(terraform show plan.out -no-color) >> "$GITHUB_OUTPUT"
         
       continue-on-error: true
       env:
