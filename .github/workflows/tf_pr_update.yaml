@@ -131,9 +131,9 @@ jobs:
           const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-          [![Visual Diff](https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/rover.png)](https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html)
-
+         
           <details><summary>Validation Output</summary>
+          
           \`\`\`\n
           ${{ steps.validate.outputs.stdout }}
           \`\`\`\n
@@ -142,12 +142,14 @@ jobs:
           #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
 
           <details><summary>Show Plan</summary>
+          
           \`\`\`\n
           ${process.env.PLAN}
           \`\`\`\n
           </details>
 
           *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+          [![Visual Diff](https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/rover.png)](https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html)
 
           // 3. If we have a comment, update it, otherwise create a new one
           if (botComment) {
