@@ -75,11 +75,13 @@ jobs:
         convert -background none -density 1000 -resize 1000x rover.svg ${{ github.run_id }}/rover.png
         
     - id: 'google-auth'
+      if: github.event_name == 'pull_request'
       uses: 'google-github-actions/auth@v1'
       with:
         credentials_json: '${{ secrets.TERRAFORM_SA }}'
     
     - id: 'google-upload-file'
+      if: github.event_name == 'pull_request'
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
         path: ${{ github.run_id }}
@@ -162,6 +164,7 @@ jobs:
             })
           }
     - uses: actions/upload-artifact@v3
+      if: github.event_name == 'pull_request'
       with:
         name: visual-diff
         path: rover.svg
