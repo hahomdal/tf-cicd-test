@@ -148,7 +148,7 @@ jobs:
           \`\`\`\n
           </details>
 
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*
           [![Visual Diff](https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/rover.png)](https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html)`;
 
           // 3. If we have a comment, update it, otherwise create a new one
