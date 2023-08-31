@@ -47,11 +47,8 @@ jobs:
       run: |
         terraform plan -out=plan.out
         terraform show -json plan.out > plan.json
-        {
-          echo 'terraform_output=<<EOF'
-          terraform show  plan.out
-          echo EOF
-        } >> "$GITHUB_OUTPUT"
+        echo stdout=$(terraform show plan.out ) >> "$GITHUB_OUTPUT"
+        
       continue-on-error: true
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SA }}
