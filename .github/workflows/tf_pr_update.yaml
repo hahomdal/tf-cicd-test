@@ -48,7 +48,7 @@ jobs:
       run: |
         terraform plan -out=plan.out
         terraform show -json plan.out > plan.json
-        echo stdout=$(terraform show plan.out -no-color) >> "$GITHUB_OUTPUT"
+        echo stdout=$(terraform show plan.out -no-color| sed -e 's/%/%25/' -e 's/\n/%0A/' -e 's/\r/%0D/') >> "$GITHUB_OUTPUT"
         
       continue-on-error: true
       env:
@@ -93,7 +93,7 @@ jobs:
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       env:
-        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        PLAN: "${{ steps.plan.outputs.stdout }}"
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
