@@ -108,7 +108,7 @@ jobs:
           //options.cwd = '/src';
           //await exec.exec('/bin/base64', ['-i', 'rover.svg'], options);
 
-          core.warning('TESTINGTESTINGTESTING');
+          core.warning('https://storage.googleapis.com/f29baf0e-81df-4090-a5a5-f33cb9566b0d/${{ github.run_id }}/index.html');
           // 1. Retrieve existing bot comments for the PR
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner,
