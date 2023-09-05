@@ -144,6 +144,7 @@ jobs:
           \`\`\`\n
           ${{ steps.validate.outputs.stdout }}
           \`\`\`\n
+
           </details>
 
           #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
