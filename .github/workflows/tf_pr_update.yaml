@@ -48,7 +48,11 @@ jobs:
       run: |
         terraform plan -out=plan.out
         terraform show -json plan.out > plan.json
-        echo stdout=$(terraform show plan.out -no-color| sed -e 's/%/%25/' -e 's/\n/%0A/' -e 's/\r/%0D/') >> "$GITHUB_OUTPUT"
+        output=$(terraform show plan.out -no-color)
+        output="${output//'%'/'%25'}"
+        output="${output//$'\n'/'%0A'}"
+        output="${output//$'\r'/'%0D'}"
+        echo stdout=${output} >> "$GITHUB_OUTPUT"
         
       continue-on-error: true
       env:
@@ -58,6 +62,7 @@ jobs:
       if: github.event_name == 'pull_request'
       run: ls -la
 
+    # Does not have access to terraform state or service account
     - name: diff
       if: github.event_name == 'pull_request'
       run: docker run --rm -v "$(pwd):/src" hahomdal/rover -standalone -planJSONPath=plan.json
@@ -75,13 +80,15 @@ jobs:
       run: |
         sudo apt-get install gsfonts
         convert -background none -density 1000 -resize 1000x rover.svg ${{ github.run_id }}/rover.png
-        
+       
+    # Maintained by google
     - id: 'google-auth'
       if: github.event_name == 'pull_request'
       uses: 'google-github-actions/auth@v1'
       with:
         credentials_json: '${{ secrets.TERRAFORM_SA }}'
-    
+   
+    # Maintained by Seth Vargo, googler
     - id: 'google-upload-file'
       if: github.event_name == 'pull_request'
       uses: 'google-github-actions/upload-cloud-storage@v1'
@@ -167,12 +174,6 @@ jobs:
               body: output
             })
           }
-    - uses: actions/upload-artifact@v3
-      if: github.event_name == 'pull_request'
-      with:
-        name: visual-diff
-        path: rover.svg
-        
 
     #- name: Upload failed tests
     #  if: github.event_name == 'pull_request'
