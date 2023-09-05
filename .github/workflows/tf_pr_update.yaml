@@ -49,9 +49,9 @@ jobs:
         terraform plan -out=plan.out
         terraform show -json plan.out > plan.json
         output=$(terraform show plan.out -no-color)
-        output="${output//'%'/'%25'}"
-        output="${output//$'\n'/'%0A'}"
-        output="${output//$'\r'/'%0D'}"
+        #output="${output//'%'/'%25'}"
+        #output="${output//$'\n'/'%0A'}"
+        #output="${output//$'\r'/'%0D'}"
         echo stdout=${output} >> "$GITHUB_OUTPUT"
         
       continue-on-error: true
