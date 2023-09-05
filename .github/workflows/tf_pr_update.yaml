@@ -52,6 +52,7 @@ jobs:
         #output="${output//'%'/'%25'}"
         #output="${output//$'\n'/'%0A'}"
         #output="${output//$'\r'/'%0D'}"
+        echo "testoutput = ${output}"
         echo stdout=${output} >> "$GITHUB_OUTPUT"
         echo mytest="test1\ntest2" >> "$GITHUB_OUTPUT"
         
