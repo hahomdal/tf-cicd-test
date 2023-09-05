@@ -153,7 +153,7 @@ jobs:
           <details><summary>Show Plan</summary>
           
           \`\`\`\n
-          ${{ steps.plan.outputs.stdout }}
+          ${{ process.env.PLAN }}
           \`\`\`\n
           </details>
 
