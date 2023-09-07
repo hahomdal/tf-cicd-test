@@ -113,8 +113,8 @@ jobs:
 
           let myOutput = '';
           let myError = '';
-          let red = '$\color{#ff0000}\texttt{\Huge\&#x26A0;\kern{0.2cm}\normalsize'
-          let green = '$\color{#ff0000}\texttt{\textbf{\Huge\&#x26A0;\kern{0.2cm}}\normalsize'
+          let red = '$\color{#ff0000}\texttt{\Huge\&#x26A0;\kern{0.2cm}\normalsize';
+          let green = '$\color{#ff0000}\texttt{\textbf{\Huge\&#x26A0;\kern{0.2cm}}\normalsize';
           const options = {};
           options.listeners = {
             stdout: (data) => {
