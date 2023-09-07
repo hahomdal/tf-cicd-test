@@ -11,7 +11,7 @@ jobs:
     environment:
       bucketname = 'f29baf0e-81df-4090-a5a5-f33cb9566b0d'
     
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latestconst output = `### Terraform Format and Style 🖌 $\color{#00ff00}\texttt{\textbf{\Huge\&#x26A0;}}\`${{ steps.fmt.outcome }}\`
     permissions:
       contents: read
       pull-requests: write
@@ -114,8 +114,8 @@ jobs:
 
           let myOutput = '';
           let myError = '';
-          //let red = '$\color{#ff0000}\texttt{\Huge\&#x26A0;\kern{0.2cm}\normalsize';
-          //let green = '$\color{#ff0000}\texttt{\textbf{\Huge\&#x26A0;\kern{0.2cm}}\normalsize';
+          let red = '$\color{#ff0000}\texttt{\Huge\&#x26A0;\kern{0.2cm}\normalsize';
+          let green = '$\color{#ff0000}\texttt{\textbf{\Huge\&#x26A0;\kern{0.2cm}}\normalsize';
           const options = {};
           options.listeners = {
             stdout: (data) => {
