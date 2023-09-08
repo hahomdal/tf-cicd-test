@@ -126,10 +126,10 @@ jobs:
           //const core = require('@actions/core');
           function addStatus(b, s) {
             if b == 'success'{
-              return s + " :white_tick: " + b
+              return " :white_tick: "
             }
             else {
-              return s + " :no_entry: " + b
+              return " :no_entry: "
             }
           }
 
@@ -174,10 +174,13 @@ jobs:
           //if (steps.fmt.outcome == 'success'){
           //   output 
           //}
-          var output = `## Terraform Format and Style 🖌 `
-          output = addStatus(steps.fmt.outcome, output)
-          // \`${{ steps.fmt.outcome }}\`
-          output = output + `## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          fmt_status = addStatus(steps.fmt.outcome)
+          val_status = addStatus(steps.validate.outcome)
+          init_status = addStatus(steps.init.outcome)
+          plan_status = addStatus(steps.plan.outcome)
+          
+          const output = `## Terraform Format and Style 🖌 ${fmt_status} \`${{ steps.fmt.outcome }}\`
+          ## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           ## Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
          
           <details><summary>Validation Output</summary>
