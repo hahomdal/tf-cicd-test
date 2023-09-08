@@ -158,8 +158,8 @@ jobs:
           })
 
           // 2. Prepare format of the comment
-          fmt_status = addStatus(\"${{ steps.fmt.outcome }}\");
-          val_status = addStatus(\"${{ steps.validate.outcome }}\");
+          fmt_status = addStatus("${{ steps.fmt.outcome }}");
+          val_status = addStatus("${{ steps.validate.outcome }}");
           // init_status = addStatus(\"${{steps.init.outcome}}\");
           //plan_status = addStatus(\"${{steps.plan.outcome}}\");
           
