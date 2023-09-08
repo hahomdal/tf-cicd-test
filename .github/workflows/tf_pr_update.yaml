@@ -176,7 +176,7 @@ jobs:
           //}
           var output = `## Terraform Format and Style 🖌 `
           output = addStatus(steps.fmt.outcome, output)
-          \`${{ steps.fmt.outcome }}\`
+          // \`${{ steps.fmt.outcome }}\`
           output = output + `## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           ## Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
          
