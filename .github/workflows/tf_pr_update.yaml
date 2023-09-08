@@ -174,10 +174,10 @@ jobs:
           //if (steps.fmt.outcome == 'success'){
           //   output 
           //}
-          fmt_status = addStatus(steps.fmt.outcome)
-          val_status = addStatus(steps.validate.outcome)
-          init_status = addStatus(steps.init.outcome)
-          plan_status = addStatus(steps.plan.outcome)
+          fmt_status = addStatus(${{steps.fmt.outcome}})
+          // val_status = addStatus(steps.validate.outcome)
+          // init_status = addStatus(steps.init.outcome)
+          //plan_status = addStatus(steps.plan.outcome)
           
           const output = `## Terraform Format and Style 🖌 ${fmt_status} \`${{ steps.fmt.outcome }}\`
           ## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
