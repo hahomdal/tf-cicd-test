@@ -124,7 +124,14 @@ jobs:
         script: |
           //const exec = require('@actions/exec');
           //const core = require('@actions/core');
-          
+          function addStatus(b, s) {
+            if b == 'success'{
+              return s + " :white_tick: " + b
+            }
+            else {
+              return s + " :no_entry: " + b
+            }
+          }
 
           let myOutput = '';
           let myError = '';
@@ -167,8 +174,10 @@ jobs:
           //if (steps.fmt.outcome == 'success'){
           //   output 
           //}
-          const output = `## Terraform Format and Style 🖌 \`${{ steps.fmt.outcome }}\`
-          ## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          var output = `## Terraform Format and Style 🖌 `
+          output = addStatus(steps.fmt.outcome, output)
+          \`${{ steps.fmt.outcome }}\`
+          output = output + `## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           ## Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
          
           <details><summary>Validation Output</summary>
