@@ -125,7 +125,7 @@ jobs:
           //const exec = require('@actions/exec');
           //const core = require('@actions/core');
           function addStatus(b) {
-            if (b == 'success'){
+            if (b == "success"){
               return " :white_tick: "
             }
             else {
