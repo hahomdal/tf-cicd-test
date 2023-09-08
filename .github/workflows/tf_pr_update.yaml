@@ -112,7 +112,7 @@ jobs:
           function addstatus(mystring) {
             return mystring + " true";
           }
-          core.info("s =" + s());
+          core.info("s =" + addstatus());
 
         
     - uses: actions/github-script@v6
