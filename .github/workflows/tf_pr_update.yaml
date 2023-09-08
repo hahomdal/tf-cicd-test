@@ -100,6 +100,20 @@ jobs:
         path: ${{ github.run_id }}
         destination: 'f29baf0e-81df-4090-a5a5-f33cb9566b0d'
         process_gcloudignore: false
+
+    - uses: actions/github-script@v6
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          var s = "Hei";
+          function addstatus(mystring) {
+            return mystring + " true";
+          }
+          core.info("s =" + s());
+
         
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
@@ -148,10 +162,11 @@ jobs:
           //if (steps.fmt.outcome != 'success' {
           //  const output = `### Terraform Format and Style 🖌 $\color{#ff0000}\texttt{\textbf{\Huge\&#x26A0;}}\`${{ steps.fmt.outcome }}\` }$
           //}
-           
-          if (steps.fmt.outcome == 'success'){
-            
-          }
+
+          //const output = ''
+          //if (steps.fmt.outcome == 'success'){
+          //   output 
+          //}
           const output = `## Terraform Format and Style 🖌 \`${{ steps.fmt.outcome }}\`
           ## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
           ## Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
