@@ -102,12 +102,15 @@ jobs:
         process_gcloudignore: false
 
     - uses: actions/github-script@v6
+      id: uuid
       if: github.event_name == 'pull_request'
       env:
         PLAN: "${{ steps.plan.outputs.stdout }}"
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
+          import { v4 as uuidv4 } from 'uuid';
+          core.setOutput('uuid', uuidv4());
           var s = "Hei";
           function addstatus(mystring) {
             return mystring + " true";
@@ -124,6 +127,8 @@ jobs:
         script: |
           //const exec = require('@actions/exec');
           //const core = require('@actions/core');
+
+
           function addStatus(b) {
               return " :white_check_mark: "
           }
