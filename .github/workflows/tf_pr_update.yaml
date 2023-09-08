@@ -109,8 +109,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          import { v4 as uuidv4 } from 'uuid';
-          core.setOutput('uuid', uuidv4());
+          const u = require('uuid');
+          core.setOutput('uuid', u.uuidv4());
           var s = "Hei";
           function addstatus(mystring) {
             return mystring + " true";
