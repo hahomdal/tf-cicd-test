@@ -125,7 +125,7 @@ jobs:
           //const exec = require('@actions/exec');
           //const core = require('@actions/core');
           function addStatus(b) {
-              return " :white_tick: "
+              return " :white_check_mark: "
           }
 
           let myOutput = '';
@@ -159,9 +159,9 @@ jobs:
 
           // 2. Prepare format of the comment
           fmt_status = addStatus(\"${{steps.fmt.outcome}}\")
-          // val_status = addStatus(steps.validate.outcome)
-          // init_status = addStatus(steps.init.outcome)
-          //plan_status = addStatus(steps.plan.outcome)
+          val_status = addStatus(\"steps.validate.outcome\")
+          // init_status = addStatus(\"steps.init.outcome\")
+          //plan_status = addStatus(\"steps.plan.outcome\")
           
           const output = `## Terraform Format and Style 🖌 ${fmt_status} \`${{ steps.fmt.outcome }}\`
           ## Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
