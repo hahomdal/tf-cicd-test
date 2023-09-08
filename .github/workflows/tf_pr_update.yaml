@@ -158,17 +158,6 @@ jobs:
           })
 
           // 2. Prepare format of the comment
-          //if (steps.fmt.outcome == 'success'){
-          //  const output = `### Terraform Format and Style 🖌 $\color{#00ff00}\texttt{\textbf{\Huge\&#x26A0;}} ${{ steps.fmt.outcome }}\`
-          //}
-          //if (steps.fmt.outcome != 'success' {
-          //  const output = `### Terraform Format and Style 🖌 $\color{#ff0000}\texttt{\textbf{\Huge\&#x26A0;}}\`${{ steps.fmt.outcome }}\` }$
-          //}
-
-          //const output = ''
-          //if (steps.fmt.outcome == 'success'){
-          //   output 
-          //}
           fmt_status = addStatus(${{steps.fmt.outcome}})
           // val_status = addStatus(steps.validate.outcome)
           // init_status = addStatus(steps.init.outcome)
