@@ -15,4 +15,4 @@ jobs:
       tflint_repo: "terraform-linters/tflint-ruleset-google"
       tflint_repo_config_path: ""
     secrets:
-      GHE_API_TOKEN: ${{ secrets.TERRAFORM_SA  }}
+      GHE_API_TOKEN: ${{ secrets.GHE_API_TOKEN }}
