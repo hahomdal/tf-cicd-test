@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket                      = "tf-cicd-test-stb"
-    prefix                      = "test-tf-cicd-demo"
+    bucket = "tf-cicd-test-stb"
+    prefix = "test-tf-cicd-demo"
   }
 
 }
